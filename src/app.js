@@ -19,40 +19,41 @@ app.post("/notes", async (req, res) => {
     })
 })
 
-app.get("/notes",async (req,res)=>{
-    
+// get/notes => Get all notes
+app.get("/notes", async (req, res) => {
+
     const notes = await noteModel.find()
 
     res.status(200).json({
-        message:"Notes fetch successfully",
-        notes:notes
+        message: "Notes fetch successfully",
+        notes: notes
     })
 })
+// Delete a note
+app.delete("/notes/:id", async (req, res) => {
 
-app.delete("/notes/:id",async (req,res)=>{
-    
     const id = req.params.id
 
     await noteModel.findByIdAndDelete({
         _id: id
     })
     res.status(200).json({
-        message:"Note deleted successfully"
+        message: "Note deleted successfully"
     })
 })
+// Update a note
+app.patch("/notes/:id", async (req, res) => {
+    const id = req.params.id
+    const description = req.body.description
 
-app.patch("/notes/:id",async (req,res) => {
-   const id = req.params.id
-   const  description = req.body.description
+    await noteModel.findByIdAndUpdate({
+        _id: id
+    }, { description: description })
 
-   await noteModel.findByIdAndUpdate({
-    _id:id
-   },{description:description})
+    res.status(200).json({
+        message: "Note updated successfully"
+    })
 
-   res.status(200).json({
-    message:"Note updated successfully"
-   })
-    
 })
 
 
