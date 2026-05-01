@@ -27,3 +27,12 @@ This is a simple Node.js backend practice project using Express.js and MongoDB w
 
 ```bash
 npm install
+
+## Schema Validation
+
+I implemented schema validation using Mongoose.
+
+- Title is required and must be at least 3 characters
+- Description is required and must be at least 10 characters
+
+Validation was tested using Postman, and screenshots are available in the `screenshots` folder.
